@@ -1,0 +1,15 @@
+FROM golang:1.16 as builderGolang
+
+# Setting the working directory and copying the files
+WORKDIR /usr/src/app
+COPY src .
+
+RUN go build -o challenge01-go main.go
+
+# Initiating second builder
+FROM scratch
+WORKDIR /usr/src/app
+
+COPY --from=builderGolang /usr/src/app .
+
+CMD ["./challenge01-go"]
