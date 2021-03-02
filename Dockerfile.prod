@@ -1,12 +1,13 @@
-FROM golang:1.16 as builderGolang
+# Builder Image
+FROM golang:1.15-alpine as builderGolang
 
 # Setting the working directory and copying the files
 WORKDIR /usr/src/app
 COPY src .
 
-RUN go build -o challenge01-go main.go
+RUN go build -ldflags="-s -w" -v -o challenge01-go main.go
 
-# Initiating second builder
+# Running builder
 FROM scratch
 WORKDIR /usr/src/app
 

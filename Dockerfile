@@ -1,4 +1,4 @@
-FROM golang:1.14
+FROM golang:1.15-alpine
 
 # Setting the working directory and copying the files
 WORKDIR /go/src/app
